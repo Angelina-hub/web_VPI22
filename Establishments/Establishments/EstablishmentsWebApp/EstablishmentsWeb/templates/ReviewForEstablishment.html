@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-image: url("/media/test.jpg");
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .reviews-list {
+            list-style: none;
+            padding: 0;
+            width: 600px;
+        }
+
+        .review {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .review-header h4 {
+            margin: 0;
+        }
+
+        .star-rating {
+            display: inline-block;
+            line-height: normal;
+            vertical-align: middle;
+        }
+
+        .rating-number,
+        .filled-star {
+            display: inline;
+            vertical-align: middle;
+            font-size: 18px; 
+        }
+
+        .filled-star {
+            color: gold;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .review-text {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    {% block content %}
+    <h2>Отзывы о "{{ establishment.name }}"</h2>
+
+    {% if feedbacks.count > 0 %}
+    <ul class="reviews-list">
+        {% for review in feedbacks %}
+        <li class="review">
+            <div class="review-header">
+                <h4>{{ review.username }}</h4>
+                <div class="star-rating">
+                    <span class="rating-number">{{ review.rating }}</span>
+                    <span class="filled-star">★</span>
+                </div>
+            </div>
+            <p class="review-text">{{ review.feedback }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Отзывов пока нет.</p>
+    {% endif %}
+
+    {% endblock %}
+</body>
+
+</html>
